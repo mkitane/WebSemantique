@@ -9,7 +9,7 @@ request
    })
    .end(function(res){
      if (res.ok) {
-		res.items.forEach(function(item,i){
+		res.body.items.forEach(function(item,i){
 		console.log(item.link);
 		})
      }
