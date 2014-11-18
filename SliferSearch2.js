@@ -9,6 +9,8 @@ request
    })
    .end(function(res){
      if (res.ok) {
-       console.log(res);
+		res.items.forEach(function(item,i){
+		console.log(item.link);
+		})
      }
    });
