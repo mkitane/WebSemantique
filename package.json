@@ -1,0 +1,6 @@
+{
+  "name": "spotlight",
+  "dependencies": {
+    "superagent": "^0.21.0"
+  }
+}
