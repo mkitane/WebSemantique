@@ -1,9 +1,10 @@
 #!/usr/bin/python
 import re
-import requests
 import json
 import sys
 import ast
+import urllib2
+
 
 def get_text_from_alchemyApi(url): 
 	baseURL = "http://access.alchemyapi.com/"
@@ -22,10 +23,10 @@ def get_text_from_alchemyApi(url):
 
 	urlRequest = urlRequest[:-1]
 
+	response = urllib2.urlopen( urlRequest )
+	html = response.read()
 
-	r = requests.get( urlRequest)
-
-	json_result = json.loads(r.text)
+	json_result = json.loads(html)
 	return {
 		"url" : json_result['url'], 
 		"text" : json_result['text']

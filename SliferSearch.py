@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import re
-import requests
 import json
 import sys
+import urllib2
 
 def get_URL_SSearch(query): 
     baseURL = "https://www.googleapis.com/customsearch/"
@@ -22,9 +22,10 @@ def get_URL_SSearch(query):
 
     urlRequest = urlRequest[:-1]
 
-    r = requests.get( urlRequest)
+    response = urllib2.urlopen( urlRequest )
+    html = response.read()
 
-    json_result = json.loads(r.text)
+    json_result = json.loads(html)
     items = json_result["items"]
     tab = []
 		
