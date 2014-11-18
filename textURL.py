@@ -34,13 +34,12 @@ def get_text_from_alchemyApi(url):
 
 
 if __name__ == '__main__':
-	if len(sys.argv) != 2:
-		print('Usage: '+ sys.argv[0] + ' <JSON_File>')
-	else:
-		jsonArg = ast.literal_eval(sys.argv[1])
-		tab = []
+	jsonArg = sys.stdin.read()  
+	
+	jsonArg = ast.literal_eval(jsonArg)
+	tab = []
 
-		for url in jsonArg : 
-			tab.append(get_text_from_alchemyApi(url))
+	for url in jsonArg : 
+		tab.append(get_text_from_alchemyApi(url))
 
-		print tab
+	json.dump(tab, sys.stdout, sort_keys = False, indent = 4)

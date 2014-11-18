@@ -39,5 +39,8 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print('Usage: '+sys.argv[0]+' <JSON_File>')
     else:
-        print get_URL_SSearch(sys.argv[1])
+        tab = get_URL_SSearch(sys.argv[1])
+        json.dump(tab, sys.stdout, sort_keys = False, indent = 4)
+        sys.exit(0)
+
 

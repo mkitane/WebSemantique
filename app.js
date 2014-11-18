@@ -11,6 +11,11 @@ router.get('/api/:query', function(req, res) {
 	var query = request.params.query;
 
 
+	var exec = require('child_process').exec;
+
+	var child = exec();
+
+
 
 });
 
