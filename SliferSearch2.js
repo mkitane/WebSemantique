@@ -9,8 +9,10 @@ request
    })
    .end(function(res){
      if (res.ok) {
-		res.body.items.forEach(function(item,i){
-		console.log(item.link);
-		})
+        tab = [];
+		    res.body.items.forEach(function(item,i){
+		     tab.push(item.link);
+		    })
+        console.log(tab);
      }
    });
