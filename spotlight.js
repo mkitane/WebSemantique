@@ -1,31 +1,43 @@
-var request = require('superagent');
+var request = require('superagent'),
+    stdin = require('stdin'),
+    async = require('async');
 
-//var urls = JSON.parse(process.argv[2]);
-
-process.stdin.setEncoding('utf8');
-
-process.stdin.on('readable', function() {
-  var chunk = process.stdin.read();
-  if (chunk !== null)
-  {
-    var urls = JSON.parse(chunk);
-    
-    urls.forEach(function(url, i)
-    {
-          request
-                .get('http://spotlight.dbpedia.org/rest/annotate?confidence=0.2&support=20')
-                .query({
-                            text: url.text
-                })
-                .set('Accept', 'application/json')
-                .end(function(res){
-                      if (res.ok) {
-                            res.body.Resources.forEach(function(resource, i) {
-                                  console.log(resource['@URI']);
-                            });
-                      }
-                });      
-    });
-    
-  }
+stdin(function(chunk){
+  analyzeData(chunk);
 });
+
+var outputArray = [];
+
+function analyzeData(chunk)
+{
+  var urlsAndText = JSON.parse(chunk);
+
+  urlsAndText.forEach(function(urlAndText, i)
+  {   
+        var uriObject = {
+            url: urlAndText.url
+        };
+    
+        request
+              .post('http://spotlight.dbpedia.org/rest/annotate')
+              .send('confidence=0.2')
+              .send('support=20')
+              .send('text='+encodeURI(urlAndText.text))
+              .set('Accept', 'application/json')
+              .end(function(res){
+                    if (res.ok) {
+                          var resourcesArray = [];
+                          res.body.Resources.forEach(function(resource, i) {
+                                resourcesArray.push(resource['@URI']);
+                          });
+                          uriObject.resources = resourcesArray;
+                          outputArray.push(uriObject);
+                    }
+                    
+                    if (i == urlsAndText.length-1) {
+                          console.log(outputArray);
+                    }
+              });      
+  });
+
+}
