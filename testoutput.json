@@ -1,26 +1,8 @@
-[ { url: 'http://www.washingtontimes.com/topics/barack-obama/',
-    resources: 
-     [ 'http://dbpedia.org/resource/Election',
-       'http://dbpedia.org/resource/President_of_the_United_States',
-       'http://dbpedia.org/resource/Barack_Obama',
-       'http://dbpedia.org/resource/Milestone',
-       'http://dbpedia.org/resource/Afghanistan',
-       'http://dbpedia.org/resource/Country',
-       'http://dbpedia.org/resource/United_States',
-       'http://dbpedia.org/resource/Partner_%28business_rank%29',
-       'http://dbpedia.org/resource/Drawing',
-       'http://dbpedia.org/resource/Force',
-       'http://dbpedia.org/resource/Election',
-       'http://dbpedia.org/resource/Critically_Endangered',
-       'http://dbpedia.org/resource/Futures_contract',
-       'http://dbpedia.org/resource/International',
-       'http://dbpedia.org/resource/Support_group',
-       'http://dbpedia.org/resource/Afghanistan',
-       'http://dbpedia.org/resource/Election',
-       'http://dbpedia.org/resource/Bodie_Broadus',
-       'http://dbpedia.org/resource/Duty',
-       'http://dbpedia.org/resource/Second_Coming_of_Christ',
-       'http://dbpedia.org/resource/Barack_Obama' 
+[ { "url": "http://www.washingtontimes.com/topics/barack-obama/",
+    "resources": 
+     [ "http://dbpedia.org/resource/Election",
+       "http://dbpedia.org/resource/President_of_the_United_States",
+       "http://dbpedia.org/resource/Barack_Obama"
        ] 
     } 
 ]

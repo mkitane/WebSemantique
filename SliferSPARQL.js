@@ -1,28 +1,37 @@
-var request = require("superagent");
-process.stdin.setEncoding('utf8');
-process.stdin.on('readable',function() {
+var request = require("superagent"),
+	stdin = require('stdin');
+
+
+stdin(function(chunk){
+  analyzeData(chunk);
+});
+
+function analyzeData(chunk)
+{
+	var URLIs = JSON.parse(chunk);
 	
-	var buffer = process.stdin.read();
-	var URLIs = JSON.parse(buffer);
-	var query = 'SELECT * WHERE { ?s ?p ?o. FILTER(?s in (';
-	buffer.forEach(function(tab){
-		tab.ressources.forEach(function(uri){
+	URLIs.forEach(function(tab)
+	{
+		var query = 'SELECT * WHERE { ?s ?p ?o. FILTER(?s in (';
+		
+		tab.resources.forEach(function(uri){
 			query = query + '<' + uri + '>,';
-		}
+		});
+		
+		query = query.slice(0,-1);
+		query = query + ')) }';
+		
+		request
+			.post('http://dbpedia.org/sparql')
+			.send('default-graph-uri='+encodeURI('http://dbpedia.org'))
+			.send('query='+encodeURI(query))
+			.send('format=json')
+			.send('timeout=30000')
+			.buffer(true)
+			.set('Accept', '*')
+			.end(function(res){
+				console.log("1");
+			});
+
 	});
-	query = query.slice(0,-1);
-	query = query + ')) }';
-	request
-		.get('http://dbpedia.org/sparql'),
-		.query({
-			query : query,
-			default-graph-uri : 'http://dbpedia.org',
-			format : 'JSON',
-			timeout : '30000',
-		}),
-		.end(
-			function(res){
-					console.log(res.body);
-						}
-		);
-	});
+}
