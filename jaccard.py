@@ -55,21 +55,24 @@ def compareFiles(iFile,iFile2):
 	return concordance
 
 def printMatrix(a):
-	matrix = ""
+	matrix = []
 
 	for i in range(len(a)):
 		line = ""
 		for j in a[i]:
 			line = line +  str(j) + ";"
 
-		matrix =  matrix + line + "\n"
-	return matrix[:-1]
+		matrix.append(line)
+	return matrix
 
 if __name__ == '__main__':
 	jsonArg = sys.stdin.read()  
 	jsonArg = ast.literal_eval(jsonArg)
 
+	matrixHeader = " ;"
+
 	for i,result  in enumerate(jsonArg) :
+		matrixHeader = matrixHeader + result["url"] + ";"
 		urlName = str(i) 
 		saveN3File(createN3File(result["results"]), urlName)
 
@@ -87,8 +90,20 @@ if __name__ == '__main__':
 			matriceJaccard[i][j] = concordance
 			matriceJaccard[j][i] = concordance
 
-	print printMatrix(matriceJaccard)
+
+	#Output handling
+	#     ; url1 ; url2 
+	#url1 ;  0   ;  X
+	#url2 ;  X   ;  0 
 
 
+	matrixHeader = matrixHeader + "\n"
+	matrix = printMatrix(matriceJaccard)
+
+	for i, n3File in enumerate(n3Files) : 
+		matrix[i] = jsonArg[i]["url"] + ";" + matrix[i]
+
+
+	print matrixHeader + "\n".join(matrix)
 	
 	
