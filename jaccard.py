@@ -7,28 +7,8 @@ import random
 import ast
 import os
 import fnmatch
+import string
 
-def createN3File(jsonArray):
-
-	N3File = ""
-
-	for triplet in jsonArray: 
-		string = ""
-		for attribute, value in triplet.iteritems():
-			string +=  value + " "
-
-		N3File += string + "\n"
-
-
-	return N3File
-
-def saveN3File(N3File, name): 
-
-	name = "n3Files/" + name
-	name = name + ".n3"
-	file = open(name, "w")
-	file.write(N3File)
-	file.close()
 
 def compareFiles(iFile,iFile2):
 
@@ -62,48 +42,101 @@ def printMatrix(a):
 		for j in a[i]:
 			line = line +  str(j) + ";"
 
-		matrix.append(line)
+		matrix.append(line[:-1])
 	return matrix
+
+
+
+
+#----------------------N3Files-------------------#
+def createN3File(jsonArray):
+
+	N3File = ""
+
+	for triplet in jsonArray: 
+		string = ""
+		for attribute, value in triplet.iteritems():
+			string +=  value + " "
+
+		N3File += string + "\n"
+
+
+	return N3File
+
+def saveN3File(N3File, path, name): 
+
+	name = path + name
+	name = name + ".n3"
+	file = open(name, "w")
+	file.write(N3File)
+	file.close()
+
+
+def saveN3Files(jsonArg, path):
+	for i,result  in enumerate(jsonArg) :
+		urlName = str(i) 
+		saveN3File(createN3File(result["results"]), path, urlName)
+
+
+def createFolder():
+	path = "n3Files/" + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(30)) + "/"
+	os.makedirs(path)
+	return path
 
 if __name__ == '__main__':
 	jsonArg = sys.stdin.read()  
 	jsonArg = ast.literal_eval(jsonArg)
 
-	matrixHeader = " ;"
 
-	for i,result  in enumerate(jsonArg) :
-		matrixHeader = matrixHeader + result["url"] + ";"
-		urlName = str(i) 
-		saveN3File(createN3File(result["results"]), urlName)
+	path = createFolder()
+	saveN3Files(jsonArg, path)
 
 
-	n3Files = fnmatch.filter(os.listdir("n3Files"),"*.n3")
+	n3Files = [path + n3file for n3file in fnmatch.filter(os.listdir( path ),"*.n3")]
 	nbFiles = len(n3Files)
 
 	matriceJaccard=[["1" for i in range(nbFiles)] for j in range(nbFiles)]
-
 	for i in range(0,nbFiles): 
 		for j in range(i+1,nbFiles):
-			firstFile = "n3Files/" + n3Files[i]
-			secondFile = "n3Files/" + n3Files[j]
+			firstFile = n3Files[i]
+			secondFile = n3Files[j]
 			concordance = compareFiles(firstFile, secondFile)
 			matriceJaccard[i][j] = concordance
 			matriceJaccard[j][i] = concordance
 
 
-	#Output handling
-	#     ; url1 ; url2 
-	#url1 ;  0   ;  X
-	#url2 ;  X   ;  0 
+	if (sys.argv[1] == "--csv") : 
+		#Output handling
+		#     ; url1 ; url2 
+		#url1 ;  0   ;  X
+		#url2 ;  X   ;  0 
+
+		matrixHeader = ";"
+		for i,result  in enumerate(jsonArg) :
+			matrixHeader = matrixHeader + result["url"] + ";"
+		matrixHeader = matrixHeader + "\n"
+		
+
+		matrix = printMatrix(matriceJaccard)
+		for i, n3File in enumerate(n3Files) : 
+			matrix[i] = jsonArg[i]["url"] + ";" + matrix[i]
 
 
-	matrixHeader = matrixHeader + "\n"
-	matrix = printMatrix(matriceJaccard)
+		print matrixHeader + "\n".join(matrix)
+		sys.exit(0)
 
-	for i, n3File in enumerate(n3Files) : 
-		matrix[i] = jsonArg[i]["url"] + ";" + matrix[i]
+	if (sys.argv[1] == "--seuil") : 
+		seuil = 0.08
+		urlAGarder = []
+		for i in range(0,nbFiles): 
+			for j in range(i+1,nbFiles):
+				if matriceJaccard[i][j] > seuil : 
+					urlAGarder.append( jsonArg[i]["url"] )
+					urlAGarder.append( jsonArg[j]["url"] )
+				
 
+		print list(set(urlAGarder))
+		sys.exit(0)
 
-	print matrixHeader + "\n".join(matrix)
 	
 	
