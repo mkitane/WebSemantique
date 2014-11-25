@@ -13,7 +13,7 @@ router.get('/api/:query', function(req, res) {
 
 	var exec = require('child_process').exec;
 
-	var child = exec();
+	var child = exec("./SliferSearch.py" + query + "| ./textURL.py | node spotlight.js | node SliferSPARQL.js | ./jaccard.py");
 
 
 

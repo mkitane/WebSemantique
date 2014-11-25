@@ -59,6 +59,6 @@ function analyzeData(chunk)
   // Running requests in parallel
   async.parallel(requests, function(err, uris)
   {
-      console.log(uris);
+      console.log(JSON.stringify(uris));
   });
 }

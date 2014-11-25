@@ -4,8 +4,9 @@ import json
 import sys
 import urllib2
 import random
-
-
+import ast
+import os
+import fnmatch
 
 def createN3File(jsonArray):
 
@@ -40,56 +41,54 @@ def compareFiles(iFile,iFile2):
 		input_file2 =  open(iFile2, 'r') 
 		for j, line2 in enumerate(input_file2): 
 
-			print "comparing ", line[:-1], "and : ", line2[:-1]
+			#print "comparing ", line[:-1], "and : ", line2[:-1]
 			if line == line2 :
-				print "comparing ", line[:-1], "and : ", line2[:-1], "are same"
+				#print "comparing ", line[:-1], "and : ", line2[:-1], "are same"
 				compteur += 1
 		input_file2.close()
 
 	union = num_lines + num_lines2 - compteur
 
-	print "Conrdance" , compteur, "/", union
+	#print "Conrdance" , compteur, "/", union
 	concordance =  float(compteur)/float(union)
-	print concordance
+	#print concordance
 	return concordance
 
 def printMatrix(a):
-	for i in range(len(a)):
-		line = " "
-		for j in a[i]:
-			line = line +  str(j) + " "
+	matrix = ""
 
-		print line
+	for i in range(len(a)):
+		line = ""
+		for j in a[i]:
+			line = line +  str(j) + ";"
+
+		matrix =  matrix + line + "\n"
+	return matrix[:-1]
 
 if __name__ == '__main__':
+	jsonArg = sys.stdin.read()  
+	jsonArg = ast.literal_eval(jsonArg)
 
-	jsonArray = [
-	{
-		"s": "okS",
-		"p" : "okP",
-		"o" : "okO"
-	},
-	{
-		"s": "okS1",
-		"p" : "okP1",
-		"o" : "okO1"
-	}
-	]
+	for i,result  in enumerate(jsonArg) :
+		urlName = str(i) 
+		saveN3File(createN3File(result["results"]), urlName)
 
 
-	nbFiles = 5 
+	n3Files = fnmatch.filter(os.listdir("n3Files"),"*.n3")
+	nbFiles = len(n3Files)
 
 	matriceJaccard=[["0" for i in range(nbFiles)] for j in range(nbFiles)]
 
 	for i in range(0,nbFiles): 
 		for j in range(i+1,nbFiles):
-			concordance = random.randint(0,300)
+			firstFile = "n3Files/" + n3Files[i]
+			secondFile = "n3Files/" + n3Files[j]
+			concordance = compareFiles(firstFile, secondFile)
 			matriceJaccard[i][j] = concordance
 			matriceJaccard[j][i] = concordance
 
-	#printMatrix(matriceJaccard)
+	print printMatrix(matriceJaccard)
 
 
-	compareFiles("jackard1.n3", "jackard2.n3")
-	#saveN3File(createN3File(jsonArray), "test2039")
+	
 	
