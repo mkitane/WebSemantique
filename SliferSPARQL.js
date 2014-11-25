@@ -1,6 +1,7 @@
 var request = require("superagent"),
 	stdin = require('stdin'),
-	utf8 = require('utf8');
+	utf8 = require('utf8'),
+	async = require('async');
 	
 var outputSSparql = [];
 
@@ -13,30 +14,52 @@ function analyzeData(chunk)
 {
 	var URLIs = JSON.parse(chunk);
 	
+	// Array that will contain requests to dbpedia sparql API for each search result
+	var requests = [];
+	
+	// Preparing requests functions
 	URLIs.forEach(function(tab)
 	{
-		var query = 'SELECT * WHERE { ?s ?p ?o. FILTER(?s in (';
-		
-		tab.resources.forEach(function(uri){
-			query = query + '<' + uri + '>,';
-		});
-		
-		query = query.slice(0,-1);
-		query = query + ')) }';
-		
-		request
-			.post('http://live.dbpedia.org/sparql')
-			.send('default-graph-uri='+encodeURI('http://dbpedia.org'))
-			.send('query='+encodeURI(query))
-			.send('format=json')
-			.send('timeout=30000')
-			.buffer(true)
-			.set('Accept', '*')
-			.end(function(res){
-				console.log("1");
-				//parseData(res.text);
-			});
-
+	  var requestFunction = (function(tab) {
+		  return function(callback)
+		  {
+			  var uriObject = {
+				  url: tab.url,
+				  results: []
+			  };
+	
+			  var query = 'SELECT * WHERE { ?s ?p ?o. FILTER(?s in (';
+	
+			  tab.resources.forEach(function(uri){
+			  	query = query + '<' + uri + '>,';
+			  });
+	
+			  query = query.slice(0,-1);
+			  query = query + ')) }';
+	
+			  request
+			  	.post('http://live.dbpedia.org/sparql')
+			  	.send('default-graph-uri='+encodeURI('http://dbpedia.org'))
+			  	.send('query='+encodeURI(query))
+			  	.send('format=json')
+			  	.send('timeout=30000')
+			  	.buffer(true)
+			  	.set('Accept', '*')
+			  	.end(function(res)
+			  	{
+			  		uriObject.results = parseData(res.text);
+			  		callback(null, uriObject);
+			  	});
+		  }
+	  })(tab);
+	
+	  requests.push(requestFunction);
+	});
+	
+	// Running requests in parallel
+	async.parallel(requests, function(err, results)
+	{
+		console.log(results);
 	});
 }
 
@@ -60,6 +83,5 @@ function parseData(data)
 		
 	});
 	
-	console.log(output);
-	
+	return output;
 }
