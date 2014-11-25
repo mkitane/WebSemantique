@@ -1,0 +1,71 @@
+body {
+      background: url('../images/SliferSearch.jpg');
+      background-size: 100%;
+}
+
+h1 {
+
+    text-transform: uppercase;
+    text-align: center;
+   color: #fff;
+font-size: 50px;
+font-family: "Lato";
+font-weight: 300;
+margin-top: 245px;
+margin-bottom: 20px;
+}
+
+.search{
+    
+   color: #fff;
+font-size: 50px;
+font-family: "Lato";
+font-weight: 100;
+
+}
+.btn3 {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 21.5px;
+    height:25px;
+    text-align: center;
+    cursor: pointer;
+    border: 0.05em solid #fff;
+    border-radius: 0px;
+    white-space: nowrap;
+    -moz-user-select: none;
+    width: 168px;
+    font-family: "Lato";
+    font-weight: 300;
+    text-decoration: none;
+}
+.btn-transparent {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+}
+.btn-same-size {
+    width: 75px;
+}
+a {
+    color: #fff;
+    transition: all 0.2s ease-in-out 0s;
+    background: none repeat scroll 0px 0px transparent;
+}
+a:hover {
+    text-decoration: none;
+    color:black;
+    background-color:rgba(255, 255, 255, 0.82);
+    }
+
+.form-controle
+{
+   margin: 0px -3px 0px 429px; 
+   width: 321px; 
+   height: 23px; 
+   padding-left:5px;  
+   background-color: transparent;
+   border: 0.05em solid #fff;
+   border-radius: 0px;
+   color: #fff;
+}
