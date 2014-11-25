@@ -1,3 +1,11 @@
- ;http://www.washingtontimes.com/topics/barack-obama/;http://www.washingtontimes.com/topics/barack-obama/;
-http://www.washingtontimes.com/topics/barack-obama/;0;1.0;
-http://www.washingtontimes.com/topics/barack-obama/;1.0;0;
+ ;http://elections.huffingtonpost.com/pollster/api;http://support.sas.com/resources/papers/proceedings13/296-2013.pdf;http://pablobarbera.com/code/streamR.html;http://code.google.com/p/google-gson/issues/detail?id=170;https://developers.google.com/news-search/v1/jsondevguide;http://www.whitehouse.gov/developers/policy-snapshots-json-feed;http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html;http://www.whitehouse.gov/developers;https://github.com/cs109/2014/blob/master/homework/HW2.ipynb;http://sunlightlabs.github.io/Capitol-Words/;
+http://elections.huffingtonpost.com/pollster/api;1;0.0;0.0756537192181;0.0413379615021;0.0269667929574;0.00920245398773;0.00964371818912;0.0221015897635;0.0;0.0;
+http://support.sas.com/resources/papers/proceedings13/296-2013.pdf;0.0;1;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;
+http://pablobarbera.com/code/streamR.html;0.0756537192181;0.0;1;0.119784946237;0.00783699059561;0.0606060606061;0.0693069306931;0.00936768149883;0.0181268882175;0.0;
+http://code.google.com/p/google-gson/issues/detail?id=170;0.0413379615021;0.0;0.119784946237;1;0.0293412068647;0.0562714776632;0.0279826464208;0.0154546933463;0.01106755822;0.00156453715776;
+https://developers.google.com/news-search/v1/jsondevguide;0.0269667929574;0.0;0.00783699059561;0.0293412068647;1;0.0209351011863;0.0484732824427;0.0172331258976;0.0569787985866;0.0;
+http://www.whitehouse.gov/developers/policy-snapshots-json-feed;0.00920245398773;0.0;0.0606060606061;0.0562714776632;0.0209351011863;1;0.0524457892083;0.0938452163315;0.00463768115942;0.0;
+http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html;0.00964371818912;0.0;0.0693069306931;0.0279826464208;0.0484732824427;0.0524457892083;1;0.0246320216281;0.0673076923077;0.0;
+http://www.whitehouse.gov/developers;0.0221015897635;0.0;0.00936768149883;0.0154546933463;0.0172331258976;0.0938452163315;0.0246320216281;1;0.0;0.0;
+https://github.com/cs109/2014/blob/master/homework/HW2.ipynb;0.0;0.0;0.0181268882175;0.01106755822;0.0569787985866;0.00463768115942;0.0673076923077;0.0;1;0.0;
+http://sunlightlabs.github.io/Capitol-Words/;0.0;0.0;0.0;0.00156453715776;0.0;0.0;0.0;0.0;0.0;1;

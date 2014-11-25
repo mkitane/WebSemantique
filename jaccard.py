@@ -80,7 +80,7 @@ if __name__ == '__main__':
 	n3Files = fnmatch.filter(os.listdir("n3Files"),"*.n3")
 	nbFiles = len(n3Files)
 
-	matriceJaccard=[["0" for i in range(nbFiles)] for j in range(nbFiles)]
+	matriceJaccard=[["1" for i in range(nbFiles)] for j in range(nbFiles)]
 
 	for i in range(0,nbFiles): 
 		for j in range(i+1,nbFiles):
