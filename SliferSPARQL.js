@@ -27,20 +27,25 @@ function analyzeData(chunk)
 				  url: tab.url,
 				  results: []
 			  };
+			  
+			  if (tab.resources.length == 0) {
+				  callback(null, uriObject);
+				  return;
+			  }
 	
-			  var query = 'SELECT * WHERE { ?s ?p ?o. FILTER(?s in (';
+			  var query = encodeURI('SELECT * WHERE { ?s ?p ?o. FILTER(?s in (');
 	
 			  tab.resources.forEach(function(uri){
-			  	query = query + '<' + uri + '>,';
+			  	query = query + encodeURI('<') + encodeURIComponent(decodeURI(uri)) + encodeURI('>,');
 			  });
-	
+			  
 			  query = query.slice(0,-1);
-			  query = query + ')) }';
+			  query = query + encodeURI(')) }');
 	
 			  request
 			  	.post('http://live.dbpedia.org/sparql')
 			  	.send('default-graph-uri='+encodeURI('http://dbpedia.org'))
-			  	.send('query='+encodeURI(query))
+			  	.send('query='+query)
 			  	.send('format=json')
 			  	.send('timeout=30000')
 			  	.buffer(true)
