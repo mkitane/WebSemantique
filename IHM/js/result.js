@@ -13,7 +13,7 @@ data_input=[
 function func()
 {
     var table = document.getElementById("table-javascript");
-
+	table.innerHTML = "";
 	data_input.forEach(function(datum,i)
 	{
 		var rowCount = table.rows.length;
