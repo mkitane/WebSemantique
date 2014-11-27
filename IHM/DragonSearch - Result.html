@@ -2,6 +2,7 @@
 <html>
 	<!-- Scripts -->
 	<script src="js/result.js"></script>
+	
  <!-- Stylesheet -->
  <link href="css/style.css" rel="stylesheet">
  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -14,14 +15,16 @@
     </head>
   
     <!-- Corps de la page -->
-    <body>
-
-        <h1>Dragon <span class="search" >Search</span></h1>
-        <div style="text-align:center;">
+    <body onload="func();">
+        <div style="text-align:left-side;">
         <form role="form">
             <input class="form-controle"  type="text" ></input>
-            <a href="./DragonSearch - Result.html" target="_self" class="btn3 btn-transparent btn-lg btn-same-size">Search</a>
+            <a href="" target="_self" class="btn3 btn-transparent btn-lg btn-same-size">Search</a>
         </form>
         </div>
+		
+		<div style="text-align:center;" >
+			<table id="table-javascript"></table>
+		</div>
     </body>
 </html>

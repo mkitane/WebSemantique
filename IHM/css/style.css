@@ -1,18 +1,16 @@
 body {
       background: url('../images/SliferSearch.jpg');
-      background-size: 105%;
-}
-
-section{
-      width: 420px;
-      margin: 250px auto 0 auto;
+	  min-height: 100%;
+		background-size: cover;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
 }
 
 h1 {
-
-    text-transform: uppercase;
-
-   color: #fff;
+text-transform: uppercase;
+text-align: center;
+color: #fff;
 font-size: 50px;
 font-family: "Lato";
 font-weight: 300;
@@ -21,7 +19,7 @@ font-weight: 300;
 
 .search{
     
-   color: #fff;
+color: #fff;
 font-size: 50px;
 font-family: "Lato";
 font-weight: 100;
@@ -64,12 +62,12 @@ a:hover {
 
 .form-controle
 {
-
    width: 321px; 
-   height: 23px; 
-   padding-left:5px;  
+   height: 23px;   
    background-color: transparent;
    border: 0.05em solid #fff;
    border-radius: 0px;
    color: #fff;
+   position:center;
+   text-align:center;
 }
