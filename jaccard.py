@@ -104,6 +104,7 @@ if __name__ == '__main__':
 			matriceJaccard[i][j] = concordance
 			matriceJaccard[j][i] = concordance
 
+	#print matriceJaccard
 
 	if (sys.argv[1] == "--csv") : 
 		#Output handling
