@@ -135,8 +135,7 @@ if __name__ == '__main__':
 					urlAGarder.append( jsonArg[i]["url"] )
 					urlAGarder.append( jsonArg[j]["url"] )
 				
-
-		print list(set(urlAGarder))
+		json.dump(list(set(urlAGarder)), sys.stdout, sort_keys = False, indent = 4)
 		sys.exit(0)
 
 	

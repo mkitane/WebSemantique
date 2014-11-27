@@ -12,7 +12,7 @@ def get_URL_SSearch(query):
         "key" : "AIzaSyCftZVPGOGCUitzwR9LyalIDSw2JFbJeGU",
         "q" : query,
         "cx" : "015219983740983411771%3Ad8srlihskhy",
-        "num" : "10"
+        "num" : "5"
     }
         
 

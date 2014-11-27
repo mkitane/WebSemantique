@@ -14,17 +14,68 @@ router.get('/api/:query', function(req, res) {
 	var exec = require('child_process').exec;
 
 	console.log("Beggining Exec");
-	var child = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccard.py --seuil", function(error, stdout, stderr) {
-    	console.log("Ending Exec");
-    	console.log(stdout);
 
-    	res.send("NICE");
+	var child = exec("node SliferSearch2.js " + query, function(error, stdout, stderr) {
+
+
+		var child2 = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccard.py --seuil", function(error2, stdout2, stderr2) {
+    		console.log("Ending Exec");
+
+			console.log(stdout);
+			console.log('------------------');
+    		console.log(stdout2);
+
+    		console.log("--------");
+
+    		console.log(formatData(stdout, stdout2 ));
+    		res.end( JSON.stringify( formatData(stdout, stdout2 )));
+		});
 	});
+	
 
 });
 
 
+function formatData(stdout, stdout2)
+{
+	var finalARenvoyer = {
+		"google" : [],
+		"dragon" : []
+	};
+	var jsonGoogle = JSON.parse(stdout);
+   	var jsonStdout2 = JSON.parse(stdout2);
 
+
+   	var jsonDragon = [];
+   	for(var i=0;i<jsonStdout2.length; i++)
+   	{
+   		var urlelem = jsonStdout2[i];
+   		var descelem = findDescription(jsonGoogle,urlelem);
+
+   		var elem = { url : urlelem, 
+   					 desc : descelem
+   					};
+   		jsonDragon.push(elem);
+   	}
+
+   	finalARenvoyer.google = jsonGoogle;
+	finalARenvoyer.dragon = jsonDragon;
+
+	return finalARenvoyer;
+}
+
+function findDescription(jsonGoogle, url)
+{
+	for(var i=0; i<jsonGoogle.length; i++)
+	{
+		if(jsonGoogle[i].url == url)
+		{
+			return jsonGoogle[i].desc
+		}
+	}
+
+	return "";
+}
 
 
 var server = http.createServer(router);

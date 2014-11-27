@@ -17,6 +17,6 @@ request
 			     desc: item.snippet
 		     });
 		    })
-        console.log(tab);
+        console.log(JSON.stringify(tab));
      }
    });
