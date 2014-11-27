@@ -1,18 +1,22 @@
 body {
       background: url('../images/SliferSearch.jpg');
-      background-size: 100%;
+      background-size: 105%;
+}
+
+section{
+      width: 420px;
+      margin: 250px auto 0 auto;
 }
 
 h1 {
 
     text-transform: uppercase;
-    text-align: center;
+
    color: #fff;
 font-size: 50px;
 font-family: "Lato";
 font-weight: 300;
-margin-top: 245px;
-margin-bottom: 20px;
+
 }
 
 .search{
@@ -60,7 +64,7 @@ a:hover {
 
 .form-controle
 {
-   margin: 0px -3px 0px 429px; 
+
    width: 321px; 
    height: 23px; 
    padding-left:5px;  
