@@ -3,9 +3,19 @@ function testloading()
       setTimeout(function(){resultLoading()}, 3000);
 }
 
-function resultLoading()
+function sendRequest()
 {
-      var data_DS = loadJSON('js/data.json');
+	$.ajax({
+	  url: "http://localhost:1234/"+getQueryVariable("searchTerm"),
+	  success: function(res) {
+		  resultLoading(JSON.parse(res));
+	  },
+	});
+}
+
+function resultLoading(data)
+{
+    var data_DS = data.dragon;
     var table = document.getElementById("DS");
 	table.innerHTML = "";
 	data_DS.forEach(function(datum,i)
@@ -18,7 +28,7 @@ function resultLoading()
 		header.innerHTML = datum.url;
 		
 		var element_desc = document.createElement("div");
-		element_desc.innerHTML = datum.Desc;
+		element_desc.innerHTML = datum.desc;
 		element_desc.class="panel-body";
 		
 		container.appendChild(header);
@@ -26,29 +36,31 @@ function resultLoading()
 		
 		table.appendChild(container);
 	});
-	var data_GS =loadJSON('js/data.json');
-	    var table = document.getElementById("GS");
-	      table.innerHTML = "";
-	      data_GS.forEach(function(datum,i)
-	      {
-	            var container = document.createElement("div");
-	            container.className="panel panel-default";
 	
-	            var header = document.createElement("div");
-	            header.className="panel-heading";
-	            header.innerHTML = datum.url;
+	var data_GS = data.google;
+	var table = document.getElementById("GS");
+	  table.innerHTML = "";
+	  data_GS.forEach(function(datum,i)
+	  {
+			var container = document.createElement("div");
+			container.className="panel panel-default";
 	
-	            var element_desc = document.createElement("div");
-	            element_desc.innerHTML = datum.Desc;
-	            element_desc.class="panel-body";
+			var header = document.createElement("div");
+			header.className="panel-heading";
+			header.innerHTML = datum.url;
 	
-	            container.appendChild(header);
-	            container.appendChild(element_desc);
+			var element_desc = document.createElement("div");
+			element_desc.innerHTML = datum.desc;
+			element_desc.class="panel-body";
 	
-	            table.appendChild(container);
-	      });
-	      // Supprimer le loader
-	      document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
+			container.appendChild(header);
+			container.appendChild(element_desc);
+	
+			table.appendChild(container);
+	  });
+	
+	// Supprimer le loader
+	document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
 }
 
 function loadJSON(filePath) {
@@ -77,4 +89,15 @@ function loadTextFileAjaxSync(filePath, mimeType)
     // TODO Throw exception
     return null;
   }
+}
+
+function getQueryVariable(variable)
+{
+	   var query = window.location.search.substring(1);
+	   var vars = query.split("&");
+	   for (var i=0;i<vars.length;i++) {
+			   var pair = vars[i].split("=");
+			   if(pair[0] == variable){return pair[1];}
+	   }
+	   return(false);
 }
