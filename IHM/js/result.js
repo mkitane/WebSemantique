@@ -1,6 +1,11 @@
-function func()
+function testloading()
 {
-	var data_DS = loadJSON('js/data.json');
+      setTimeout(function(){resultLoading()}, 3000);
+}
+
+function resultLoading()
+{
+      var data_DS = loadJSON('js/data.json');
     var table = document.getElementById("DS");
 	table.innerHTML = "";
 	data_DS.forEach(function(datum,i)
@@ -21,31 +26,29 @@ function func()
 		
 		table.appendChild(container);
 	});
-}
-
-function gfunc()
-{
 	var data_GS =loadJSON('js/data.json');
-    var table = document.getElementById("GS");
-	table.innerHTML = "";
-	data_GS.forEach(function(datum,i)
-	{
-		var container = document.createElement("div");
-		container.className="panel panel-default";
-
-		var header = document.createElement("div");
-		header.className="panel-heading";
-		header.innerHTML = datum.url;
-		
-		var element_desc = document.createElement("div");
-		element_desc.innerHTML = datum.Desc;
-		element_desc.class="panel-body";
-		
-		container.appendChild(header);
-		container.appendChild(element_desc);
-		
-		table.appendChild(container);
-	});
+	    var table = document.getElementById("GS");
+	      table.innerHTML = "";
+	      data_GS.forEach(function(datum,i)
+	      {
+	            var container = document.createElement("div");
+	            container.className="panel panel-default";
+	
+	            var header = document.createElement("div");
+	            header.className="panel-heading";
+	            header.innerHTML = datum.url;
+	
+	            var element_desc = document.createElement("div");
+	            element_desc.innerHTML = datum.Desc;
+	            element_desc.class="panel-body";
+	
+	            container.appendChild(header);
+	            container.appendChild(element_desc);
+	
+	            table.appendChild(container);
+	      });
+	      // Supprimer le loader
+	      document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
 }
 
 function loadJSON(filePath) {
