@@ -17,6 +17,14 @@ font-weight: 300;
 
 }
 
+.resultText{
+color: #fff;
+font-size: 30px;
+font-family: "Lato";
+font-weight: 100;
+text-align: center;
+}
+
 .search{
     
 color: #fff;
