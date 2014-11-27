@@ -12,20 +12,24 @@ data_input=[
 
 function func()
 {
-    var table = document.getElementById("table-javascript");
+    var table = document.getElementById("DS");
 	table.innerHTML = "";
 	data_input.forEach(function(datum,i)
 	{
-		var rowCount = table.rows.length;
-		var row = table.insertRow(rowCount);
+		var container = document.createElement("div");
+		container.className="panel panel-default";
+
+		var header = document.createElement("div");
+		header.className="panel-heading";
+		header.innerHTML = datum.url;
 		
-		var cell = row.insertCell(0);
-		var element_url = document.createElement("h3");
-		element_url.innerHTML = datum.url;
-		cell.appendChild(element_url);
-		
-		var element_desc = document.createElement("p");
+		var element_desc = document.createElement("div");
 		element_desc.innerHTML = datum.Desc;
-		cell.appendChild(element_desc);
+		element_desc.class="panel-body";
+		
+		container.appendChild(header);
+		container.appendChild(element_desc);
+		
+		table.appendChild(container);
 	});
 }
