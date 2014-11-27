@@ -8,14 +8,18 @@ router.get("/hello", function(request, response) {response.end("Hello, World!");
 
 router.get('/api/:query', function(req, res) {
 
-	var query = request.params.query;
+	var query = req.params.query;
 
 
 	var exec = require('child_process').exec;
 
-	var child = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | node SliferSPARQL.js | ./jaccard.py --seuil");
+	console.log("Beggining Exec");
+	var child = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccard.py --seuil", function(error, stdout, stderr) {
+    	console.log("Ending Exec");
+    	console.log(stdout);
 
-
+    	res.send("NICE");
+	});
 
 });
 

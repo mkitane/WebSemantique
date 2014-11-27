@@ -43,7 +43,7 @@ function analyzeData(chunk)
 			  query = query + encodeURI(')) }');
 	
 			  request
-			  	.post('http://live.dbpedia.org/sparql')
+			  	.post('http://dbpedia.org/sparql')
 			  	.send('default-graph-uri='+encodeURI('http://dbpedia.org'))
 			  	.send('query='+query)
 			  	.send('format=json')
@@ -52,7 +52,7 @@ function analyzeData(chunk)
 			  	.set('Accept', '*')
 			  	.end(function(res)
 			  	{
-			  		uriObject.results = parseData(res.text);
+			  		uriObject.results = parseData( clean(res.text) ) ;
 			  		callback(null, uriObject);
 			  	});
 		  }
@@ -68,6 +68,14 @@ function analyzeData(chunk)
 	});
 }
 
+function clean(data)
+{
+
+	function replaceAll(find, replace, str) {
+  		return str.replace(new RegExp(find, 'g'), replace);
+	}
+	return replaceAll("\U", "", data);
+}
 function parseData(data)
 {
 	var res = JSON.parse(data);
