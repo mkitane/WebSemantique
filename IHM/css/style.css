@@ -7,9 +7,12 @@ body {
 		background-position: center center;
 }
 
+.mainPage{
+      margin: 260px auto 0 auto ;
+}
 h1 {
 text-transform: uppercase;
-text-align: center;
+
 color: #fff;
 font-size: 50px;
 font-family: "Lato";
@@ -21,7 +24,7 @@ font-weight: 300;
 color: #fff;
 font-size: 30px;
 font-family: "Lato";
-font-weight: 100;
+font-weight: 300;
 text-align: center;
 }
 
@@ -33,11 +36,11 @@ font-family: "Lato";
 font-weight: 100;
 
 }
-.btn3 {
+.btn3A {
     display: inline-block;
     font-size: 12px;
-    line-height: 21.5px;
-    height:25px;
+    line-height: 23px;
+    height:23px;
     text-align: center;
     cursor: pointer;
     border: 0.05em solid #fff;
@@ -49,12 +52,17 @@ font-weight: 100;
     font-weight: 300;
     text-decoration: none;
 }
-.btn-transparent {
+.btn-transparentA {
     color: #fff;
     background-color: transparent;
     border-color: #fff;
 }
-.btn-same-size {
+.btn-transparentB {
+    color: #000;
+    background-color: rgba(255,255, 255, 0.7);
+    border-color: #fff;
+}
+.btn-same-sizeA {
     width: 75px;
 }
 a {
@@ -77,5 +85,17 @@ a:hover {
    border-radius: 0px;
    color: #fff;
    position:center;
-   text-align:center;
+   padding: 0 0 0 5px;
 }
+.form-controle1
+{
+   width: 321px; 
+   height: 23px;   
+   background-color: transparent;
+   border: 0.05em solid #fff;
+   border-radius: 0px;
+   color: #fff;
+   position:center;
+   padding: 0 0 0 5px;
+}
+
