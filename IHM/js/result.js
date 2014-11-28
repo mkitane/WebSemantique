@@ -5,8 +5,9 @@ function testloading()
 
 function sendRequest()
 {
+	console.log("YO");
 	$.ajax({
-	  url: "http://localhost:1234/"+getQueryVariable("searchTerm"),
+	  url: "http://localhost:1234/api/"+getQueryVariable("searchTerm"),
 	  success: function(res) {
 		  resultLoading(JSON.parse(res));
 	  },
@@ -24,8 +25,11 @@ function resultLoading(data)
 		container.className="panel panel-default";
 
 		var header = document.createElement("div");
+		var link = document.createElement("a");
+		link.href = datum.url;
+		link.innerHTML = datum.title;
 		header.className="panel-heading";
-		header.innerHTML = datum.url;
+		header.appendChild(link);
 		
 		var element_desc = document.createElement("div");
 		element_desc.innerHTML = datum.desc;
@@ -46,8 +50,11 @@ function resultLoading(data)
 			container.className="panel panel-default";
 	
 			var header = document.createElement("div");
+			var link = document.createElement("a");
+			link.href = datum.url;
+			link.innerHTML = datum.title;
 			header.className="panel-heading";
-			header.innerHTML = datum.url;
+			header.appendChild(link);
 	
 			var element_desc = document.createElement("div");
 			element_desc.innerHTML = datum.desc;

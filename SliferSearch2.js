@@ -14,7 +14,8 @@ request
 		    res.body.items.forEach(function(item,i){
 		     tab.push({
 			     url: item.link,
-			     desc: item.snippet
+			     desc: item.snippet,
+			     title : item.title
 		     });
 		    })
         console.log(JSON.stringify(tab));

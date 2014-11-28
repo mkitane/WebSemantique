@@ -50,10 +50,11 @@ function formatData(stdout, stdout2)
    	for(var i=0;i<jsonStdout2.length; i++)
    	{
    		var urlelem = jsonStdout2[i];
-   		var descelem = findDescription(jsonGoogle,urlelem);
+   		var descTitle = findDescription(jsonGoogle,urlelem);
 
    		var elem = { url : urlelem, 
-   					 desc : descelem
+   					 desc : descTitle.desc,
+   					 title : descTitle.title 
    					};
    		jsonDragon.push(elem);
    	}
@@ -70,7 +71,9 @@ function findDescription(jsonGoogle, url)
 	{
 		if(jsonGoogle[i].url == url)
 		{
-			return jsonGoogle[i].desc
+			return { desc : jsonGoogle[i].desc,
+					title : jsonGoogle[i].title
+				}
 		}
 	}
 

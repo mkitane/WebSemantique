@@ -106,6 +106,7 @@ a:hover {
 .GoogleContainer, .DragonContainer
 {
       display: inline-block;
+      vertical-align: top;
       width: 48%;
       margin:10px;
       }
