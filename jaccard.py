@@ -117,13 +117,43 @@ if __name__ == '__main__':
 			matrixHeader = matrixHeader + result["url"] + ";"
 		matrixHeader = matrixHeader + "\n"
 		
-
+		
 		matrix = printMatrix(matriceJaccard)
 		for i, n3File in enumerate(n3Files) : 
 			matrix[i] = jsonArg[i]["url"] + ";" + matrix[i]
-
-
+		
+		
 		print matrixHeader + "\n".join(matrix)
+		
+		
+		
+		##Two diferent files
+		nodes_header = "Nodes,Id,Label\n"
+		nodes_content = ""
+		for i,result  in enumerate(jsonArg) :
+			nodes_content = nodes_content + result["url"] + "," + str(i) + "," +result["url"] + "\n"
+		
+		nodes = nodes_header + nodes_content
+		file = open("noeuds_graph.csv", "w")
+		file.write(nodes)
+		file.close()
+
+
+		links_header = "Source,Target,Type,Id,Label,Weight\n"
+		links_content = ""
+		
+		identifiant = 0
+		for i in range(0,nbFiles): 
+			for j in range(i+1,nbFiles):
+				links_content = links_content + str(i) + "," + str(j) + ",Nondirected," +  str(identifiant) + "," + str(matriceJaccard[i][j]) + "\n"
+				identifiant = identifiant + 1 
+				
+		links = links_header + links_content
+		file = open("lien_graph.csv", "w")
+		file.write(links)
+		file.close()
+
+		
 		sys.exit(0)
 
 	if (sys.argv[1] == "--seuil") : 
