@@ -107,7 +107,16 @@ if __name__ == '__main__':
 	#print matriceJaccard
 
 	if (sys.argv[1] == "--group") : 
-		print matriceJaccard
+		matrixHeader = []
+		for i,result  in enumerate(jsonArg) :
+			matrixHeader.append(result["url"])
+
+		aretourner = {
+			"matrix" : matriceJaccard, 
+			"header" : matrixHeader
+		}
+		json.dump(aretourner, sys.stdout, sort_keys = False, indent = 4)
+
 		sys.exit(0)
 
 	if (sys.argv[1] == "--csv") : 

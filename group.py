@@ -8,8 +8,11 @@ import networkx as nx
 import sys 
 import ast
 
-matrix = sys.stdin.read()  
-matrix = ast.literal_eval(matrix)
+total = sys.stdin.read()  
+total = ast.literal_eval(total)
+
+header = total['header']
+matrix = total['matrix']
 
 
 G=nx.Graph()
@@ -24,9 +27,9 @@ for i in range(0,len(matrix)):
 
 elarge=[(u,v) for (u,v,d) in G.edges(data=True) if d['weight'] > 0.1]
 #esmall=[(u,v) for (u,v,d) in G.edges(data=True) if d['weight'] > 0.02]
-print elarge
 
 final = []
+
 for noeud in G.nodes():
 	group = []
 	alreadyInGroup = False 
@@ -44,6 +47,7 @@ for noeud in G.nodes():
 			break
 
 
+
 	if alreadyInGroup == False : 
 		group.append(noeud)
 		for (u,v) in elarge:
@@ -53,10 +57,20 @@ for noeud in G.nodes():
 				group.append(u)
 		final.append(group)
 
+
 for i,group in enumerate(final): 
 	final[i] = list(set(final[i]))
 
 
+finalLinks = []
+for group in final : 
+	groupLink = []
+	for elem in group : 
+		groupLink.append(header[elem])
+
+	finalLinks.append(groupLink)
+
+print finalLinks
 print final
 
 pos=nx.spring_layout(G) # positions for all nodes
