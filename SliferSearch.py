@@ -11,8 +11,8 @@ def get_URL_SSearch(query):
     options = {
         "key" : "AIzaSyCftZVPGOGCUitzwR9LyalIDSw2JFbJeGU",
         "q" : query,
-        "cx" : "015219983740983411771%3Ad8srlihskhy",
-        "num" : "5"
+        "cx" : "015219983740983411771:d8srlihskhy",
+        "num" : "10"
     }
         
 

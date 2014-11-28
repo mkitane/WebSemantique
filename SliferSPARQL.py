@@ -8,10 +8,40 @@ import urllib
 import unicodedata
 import re 
 
-final = []
 def clean(data) : 
 	data =  data.replace("\U","")
+	data = data.replace("\u", "")
 	return data
+
+
+def filterData(data):
+	if "wikiPage" in data : 
+		return True
+
+	return False
+
+def enrichissement(output):
+	seuil = 50
+	if len(output) > 50 :
+		return False
+
+	req = []
+
+
+	for elem in output : 
+		url = elem['url']
+		results = elem['results']
+
+		resources = []
+		for triplet in results : 
+			resources.append(triplet['o'])
+
+		finalParsed = {
+			"url" : url,
+			"resources" : resources
+		}
+		req.append(finalParsed) 
+
 
 def parseData(data):
 	res = json.loads(data)
@@ -20,6 +50,10 @@ def parseData(data):
 	for elt in res["results"]["bindings"]:
 		if elt["o"]["type"] != 'uri' : 
 			continue
+
+		if filterData(elt["p"]["value"]):
+			continue
+
 		myelem = {
 			"s" : elt["s"]["value"],
 			"p" : elt["p"]["value"],
@@ -30,15 +64,9 @@ def parseData(data):
 
 	return output
 
-if __name__ == '__main__':
+
+def lancerRequete(jsonArg) :
 	final = []
-
-
-	jsonArg = sys.stdin.read()  
-	
-	jsonArg = ast.literal_eval(jsonArg)
-
-
 	for URI in jsonArg: 
 		url = URI['url'];
 		resources = URI['resources']
@@ -57,6 +85,7 @@ if __name__ == '__main__':
 			"timeout" : "30000", 
 			"query" : d
 		}
+
 		header = { "Accept" : "*" }
 
 		urlReq = "http://dbpedia.org/sparql"
@@ -72,6 +101,22 @@ if __name__ == '__main__':
 			"results" : parsed
 		}
 		final.append( finalParsed )
+
+	return final 
+if __name__ == '__main__':
+	jsonArg = sys.stdin.read()  
+	jsonArg = ast.literal_eval(jsonArg)
+
+
+	final = lancerRequete(jsonArg)
+	
+
+	enrichi = enrichissement(final)
+
+
+	if enrichi : 
+		enrichi = lancerRequete(enrichi)
+		final = final + enrichi 
 
 	json.dump(final, sys.stdout, sort_keys = False, indent = 4)
 

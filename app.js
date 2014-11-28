@@ -9,7 +9,7 @@ router.get("/hello", function(request, response) {response.end("Hello, World!");
 router.get('/api/:query', function(req, res) {
 
 	var query = req.params.query;
-
+	var query = query.toLowerCase();
 
 	var exec = require('child_process').exec;
 
@@ -20,6 +20,7 @@ router.get('/api/:query', function(req, res) {
 
 		var child2 = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccard.py --seuil", function(error2, stdout2, stderr2) {
     		console.log("Ending Exec");
+    		console.log(error2);
 
 			console.log(stdout);
 			console.log('------------------');

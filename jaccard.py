@@ -106,6 +106,10 @@ if __name__ == '__main__':
 
 	#print matriceJaccard
 
+	if (sys.argv[1] == "--group") : 
+		print matriceJaccard
+		sys.exit(0)
+		
 	if (sys.argv[1] == "--csv") : 
 		#Output handling
 		#     ; url1 ; url2 
