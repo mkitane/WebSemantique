@@ -36,11 +36,11 @@ font-family: "Lato";
 font-weight: 100;
 
 }
-.btn3A {
+.bouttonA {
     display: inline-block;
     font-size: 12px;
-    line-height: 23px;
-    height:23px;
+    line-height: 20px;
+    height:24px;
     text-align: center;
     cursor: pointer;
     border: 0.05em solid #fff;
@@ -51,29 +51,49 @@ font-weight: 100;
     font-family: "Lato";
     font-weight: 300;
     text-decoration: none;
-}
-.btn-transparentA {
     color: #fff;
     background-color: transparent;
     border-color: #fff;
+    width: 75px;
+    background: none repeat scroll 0px 0px transparent;
 }
-.btn-transparentB {
+
+.bouttonB {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 20px;
+    height:24px;
+    text-align: center;
+    cursor: pointer;
+    border: 0.05em solid #fff;
+    border-radius: 0px;
+    white-space: nowrap;
+    -moz-user-select: none;
+    width: 168px;
+    font-family: "Lato";
+    font-weight: 300;
+    text-decoration: none;
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    width: 75px;
+    background: none repeat scroll 0px 0px transparent;
     color: #000;
     background-color: rgba(255,255, 255, 0.7);
     border-color: #fff;
 }
-.btn-same-sizeA {
-    width: 75px;
-}
-a {
-    color: #fff;
-    transition: all 0.2s ease-in-out 0s;
-    background: none repeat scroll 0px 0px transparent;
-}
-a:hover {
+
+
+.bouttonA:hover {
     text-decoration: none;
     color:black;
     background-color:rgba(255, 255, 255, 0.82);
+    }
+
+.bouttonB:hover {
+    text-decoration: none;
+    color:black;
+    background-color:rgba(255, 255, 255, 0.95);
     }
 
 .form-controle
@@ -99,7 +119,7 @@ a:hover {
    padding: 0 0 0 5px;
 }
 .Moreno{
-      margin: 10px auto 30px auto ;
+      margin: 10px auto 20px auto ;
       text-align: center;
 }
 
