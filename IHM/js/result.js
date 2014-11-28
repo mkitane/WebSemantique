@@ -33,7 +33,7 @@ function resultLoading(data)
 		
 		var element_desc = document.createElement("div");
 		element_desc.innerHTML = datum.desc;
-		element_desc.class="panel-body";
+		element_desc.className="panel-body";
 		
 		container.appendChild(header);
 		container.appendChild(element_desc);
@@ -58,14 +58,21 @@ function resultLoading(data)
 	
 			var element_desc = document.createElement("div");
 			element_desc.innerHTML = datum.desc;
-			element_desc.class="panel-body";
+			element_desc.className="panel-body";
 	
 			container.appendChild(header);
 			container.appendChild(element_desc);
 	
 			table.appendChild(container);
 	  });
-	
+	 var imageHolder = document.getElementById("imageHolder");
+	 var jumbo = document.createElement("div");
+	 jumbo.className ="jumbotron";
+	 var image = document.createElement("img");
+	 image.src="images/weighted_graph.png"
+	 jumbo.appendChild(image);
+	 imageHolder.appendChild(jumbo);
+	 
 	// Supprimer le loader
 	document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
 }
