@@ -95,7 +95,7 @@ if __name__ == '__main__':
 	n3Files = [path + n3file for n3file in fnmatch.filter(os.listdir( path ),"*.n3")]
 	nbFiles = len(n3Files)
 
-	matriceJaccard=[["1" for i in range(nbFiles)] for j in range(nbFiles)]
+	matriceJaccard=[[1 for i in range(nbFiles)] for j in range(nbFiles)]
 	for i in range(0,nbFiles): 
 		for j in range(i+1,nbFiles):
 			firstFile = n3Files[i]
@@ -107,9 +107,18 @@ if __name__ == '__main__':
 	#print matriceJaccard
 
 	if (sys.argv[1] == "--group") : 
-		print matriceJaccard
+		matrixHeader = []
+		for i,result  in enumerate(jsonArg) :
+			matrixHeader.append(result["url"])
+
+		aretourner = {
+			"matrix" : matriceJaccard, 
+			"header" : matrixHeader
+		}
+		json.dump(aretourner, sys.stdout, sort_keys = False, indent = 4)
+
 		sys.exit(0)
-		
+
 	if (sys.argv[1] == "--csv") : 
 		#Output handling
 		#     ; url1 ; url2 
