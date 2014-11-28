@@ -145,7 +145,7 @@ if __name__ == '__main__':
 		identifiant = 0
 		for i in range(0,nbFiles): 
 			for j in range(i+1,nbFiles):
-				links_content = links_content + str(i) + "," + str(j) + ",Nondirected," +  str(identifiant) + "," + str(matriceJaccard[i][j]) + "\n"
+				links_content = links_content + str(i) + "," + str(j) + ",undirected," +  str(identifiant) + "," + str(matriceJaccard[i][j]) + "\n"
 				identifiant = identifiant + 1 
 				
 		links = links_header + links_content
