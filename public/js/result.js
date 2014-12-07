@@ -69,8 +69,12 @@ function resultLoading(data)
 	
 			table.appendChild(container);
 	  }); 
-	// Supprimer le loader
-	document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
+
+	  var jaccardHeader = data.jaccardHeader;
+	  var jaccard = data.jaccard; 
+	  main(jaccardHeader,jaccard);
+		// Supprimer le loader
+		document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
 }
 
 function loadJSON(filePath) {
@@ -111,3 +115,76 @@ function getQueryVariable(variable)
 	   }
 	   return(false);
 }
+
+
+
+//-- relative au graph
+	function main (headers, jaccard) {
+            var graph = Viva.Graph.graph();
+            
+            for(var i=0; i<jaccard.length; i++)
+            {
+            	for(var j=(i+1) ; j<jaccard[i].length ; j++)
+            	{
+            		if(jaccard[i][j] > 0.08)
+            		{
+            			graph.addLink(headers[i], headers[j], {weight: jaccard[i][j]*50});	
+            		}
+            	}
+            }
+          
+            
+            generateGraph(graph);
+        
+        }
+
+
+
+        function generateGraph(graph)
+        {
+            var graphics = Viva.Graph.View.svgGraphics();
+            var nodeSize = 10;
+            graphics.node(function(node) {
+              // This time it's a group of elements: http://www.w3.org/TR/SVG/struct.html#Groups
+              var ui = Viva.Graph.svg('g'),
+                  // Create SVG text element with user id as content
+                  svgText = Viva.Graph.svg('text').attr('y', '-4px').text(node.id),
+                  img = Viva.Graph.svg('rect')
+                     .attr('width', nodeSize)
+                     .attr('height', nodeSize);
+              ui.append(svgText);
+              ui.append(img);
+              return ui;
+            }).placeNode(function(nodeUI, pos) {
+                // 'g' element doesn't have convenient (x,y) attributes, instead
+                // we have to deal with transforms: http://www.w3.org/TR/SVG/coords.html#SVGGlobalTransformAttribute
+                nodeUI.attr('transform',
+                            'translate(' +
+                                  (pos.x - nodeSize/2) + ',' + (pos.y - nodeSize/2) +
+                            ')');
+            });
+
+
+
+            graphics.link(function(link){
+                return Viva.Graph.svg('path')
+                           .attr('stroke', 'black')
+                           .attr('stroke-width', link.weight);
+            }).placeLink(function(linkUI, fromPos, toPos) {
+                // linkUI - is the object returend from link() callback above.
+                var data = 'M' + fromPos.x + ',' + fromPos.y +
+                           'L' + toPos.x + ',' + toPos.y;
+                // 'Path data' (http://www.w3.org/TR/SVG/paths.html#DAttribute )
+                // is a common way of rendering paths in SVG:
+                linkUI.attr("d", data);
+            });
+
+
+            // Render the graph
+           // Render the graph
+            var renderer = Viva.Graph.View.renderer(graph, {
+                    graphics : graphics,
+                    container  : document.getElementById('graphDiv')
+                });
+            renderer.run();
+        }

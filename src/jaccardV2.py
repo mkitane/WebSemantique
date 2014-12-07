@@ -92,7 +92,7 @@ if __name__ == '__main__':
 				})
 
 
-		jsondump = { "google" : google , "dragon" : dragon}
+		jsondump = { "google" : google , "dragon" : dragon, "jaccardHeader" : url_sets, "jaccard" : matriceJaccard}
 		json.dump(jsondump, sys.stdout, sort_keys = False, indent = 4)
 		sys.exit(0)
 
