@@ -1,6 +1,6 @@
 function testloading()
 {
-      setTimeout(function(){resultLoading()}, 3000);
+      setTimeout(function(){resultLoading()}, 100000000);
 }
 
 function sendRequest()
@@ -11,7 +11,7 @@ function sendRequest()
 	  success: function(res) {
 		  resultLoading(res);
 	  },
-	  timeout: 1000000
+	  timeout: 100000000
 	});
 }
 

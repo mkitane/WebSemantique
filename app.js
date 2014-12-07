@@ -18,9 +18,18 @@ router.get('/api/:query', function(req, res) {
 
 	var commandLine = "./src/SliferSearch.py " + query + " | ./src/textURL.py | node src/spotlight.js | ./src/SliferSPARQL.py | ./src/jaccardV2.py --seuil"; 
 	var child = exec( commandLine , function(error, stdout, stderr) {
-		console.log("Ending Exec");
-		console.log(stdout);
-		res.end( JSON.stringify( stdout ));
+		if(!error)
+		{
+			console.log("Ending Exec");
+			console.log(stdout);
+			res.end( JSON.stringify( stdout ));	
+		}else
+		{
+			console.log("Error");
+			console.log(stderr);
+			res.end("ERROR");
+		}
+
 	});
 	
 
