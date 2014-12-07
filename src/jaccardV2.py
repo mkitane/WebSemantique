@@ -47,8 +47,8 @@ def printMatrix(a):
 if __name__ == '__main__':
 	jsonArg = sys.stdin.read()  
 	jsonArg = ast.literal_eval(jsonArg)
-	#path = jaccard_utils.createFolder()
-	#jaccard_utils.saveN3Files(jsonArg, path)
+	path = jaccard_utils.createFolder()
+	jaccard_utils.saveN3Files(jsonArg, path)
 
 	sets = create_sets(jsonArg)
 	url_sets = url_sets(jsonArg)
