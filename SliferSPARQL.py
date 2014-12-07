@@ -67,9 +67,9 @@ def parseData(data):
 
 def lancerRequete(jsonArg) :
 	final = []
-	for URI in jsonArg: 
-		url = URI['url'];
-		resources = URI['resources']
+	for item in jsonArg: 
+		url = item['url'];
+		resources = item['resources']
 		#print url
 		#print resources
 
@@ -98,6 +98,8 @@ def lancerRequete(jsonArg) :
 		parsed = parseData(html)
 		finalParsed = {
 			"url" : url,
+			"desc" : item["desc"],
+            "title" : item["title"],
 			"results" : parsed
 		}
 		final.append( finalParsed )
