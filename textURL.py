@@ -27,10 +27,8 @@ def get_text_from_alchemyApi(url):
 	html = response.read()
 
 	json_result = json.loads(html)
-	return {
-		"url" : json_result['url'], 
-		"text" : json_result['text']
-	} 
+	return json_result['text']
+	
 
 
 if __name__ == '__main__':
@@ -39,7 +37,9 @@ if __name__ == '__main__':
 	jsonArg = ast.literal_eval(jsonArg)
 	tab = []
 
-	for url in jsonArg : 
-		tab.append(get_text_from_alchemyApi(url))
+	for item in jsonArg : 
+		url = item["url"]
+		item["text"] = get_text_from_alchemyApi(url)
+		tab.append(item)
 
 	json.dump(tab, sys.stdout, sort_keys = False, indent = 4)

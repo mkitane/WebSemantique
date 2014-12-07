@@ -30,7 +30,12 @@ def get_URL_SSearch(query):
     tab = []
 		
     for item in items : 
-        tab.append(item["link"])
+        objet = {
+            "url" : item["link"],
+            "desc" : item["snippet"],
+            "title" : item["title"]
+        }
+        tab.append(objet)
 
     return tab
 
