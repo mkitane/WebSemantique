@@ -9,7 +9,7 @@ function sendRequest()
 	$.ajax({
 	  url: "http://localhost:1234/api/"+getQueryVariable("searchTerm"),
 	  success: function(res) {
-		  resultLoading(JSON.parse(res));
+		  resultLoading(res);
 	  },
 	  timeout: 1000000
 	});
@@ -17,6 +17,9 @@ function sendRequest()
 
 function resultLoading(data)
 {
+	data = JSON.parse(data);
+	data = JSON.parse(data);
+	
     var data_DS = data.dragon;
     var table = document.getElementById("DS");
 	table.innerHTML = "";
