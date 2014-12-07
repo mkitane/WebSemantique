@@ -160,46 +160,42 @@ if __name__ == '__main__':
 
 		sys.exit(0)
 
-
-def cluster(): 
-	print "---"
-	m = []
-	for i in range(0,len_sets): 
-		for j in range(i+1,len_sets):
-			m.append([i,j])
-	print m
-	print "----"
-	matrice_clusters = list(matriceJaccard)
-	for f in range(0,2) : 
-		moy_seuil = 0
-		compteur = 0 
+	if (sys.argv[1] == "--clusters") : 
+		m = []
 		for i in range(0,len_sets): 
 			for j in range(i+1,len_sets):
-				if matrice_clusters[i][j] != 0 : 
-					moy_seuil += matrice_clusters[i][j]
-					compteur += 1
+				m.append([i,j])
+		matrice_clusters = list(matriceJaccard)
+		for f in range(0,2) : 
+			moy_seuil = 0
+			compteur = 0 
+			for i in range(0,len_sets): 
+				for j in range(i+1,len_sets):
+					if matrice_clusters[i][j] != 0 : 
+						moy_seuil += matrice_clusters[i][j]
+						compteur += 1
 
-		moy_seuil = float(moy_seuil) / float(compteur)
-		print moy_seuil
+			moy_seuil = float(moy_seuil) / float(compteur)
+			print moy_seuil
 
-		matrice_clusters = list(matrice_clusters)
+			matrice_clusters = list(matrice_clusters)
+			for i in range(0,len_sets): 
+				for j in range(i+1,len_sets):
+					if matrice_clusters[i][j] < moy_seuil : 
+						matrice_clusters[i][j] = 0
+						matrice_clusters[j][i] = 0
+
+			#print matrice_clusters
+
+		clusters = []
+		clustersUrl = []
 		for i in range(0,len_sets): 
 			for j in range(i+1,len_sets):
-				if matrice_clusters[i][j] < moy_seuil : 
-					matrice_clusters[i][j] = 0
-					matrice_clusters[j][i] = 0
-
-		print matrice_clusters
-
-	clusters = []
-	clustersUrl = []
-	for i in range(0,len_sets): 
-		for j in range(i+1,len_sets):
-			if matrice_clusters[i][j] != 0 :
-				clusters.append([i,j])
-				clustersUrl.append([url_sets[i], url_sets[j]])
-	print clusters
-	print clustersUrl
+				if matrice_clusters[i][j] != 0 :
+					clusters.append([i,j])
+					clustersUrl.append([url_sets[i], url_sets[j]])
+		print clusters
+		print clustersUrl
 
 
 # coordinates = []
