@@ -11,6 +11,7 @@ function sendRequest()
 	  success: function(res) {
 		  resultLoading(JSON.parse(res));
 	  },
+	  timeout: 1000000
 	});
 }
 

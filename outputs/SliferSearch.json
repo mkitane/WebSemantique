@@ -1,4 +1,5 @@
 [
+<<<<<<< HEAD
     {
         "url": "http://en.wikipedia.org/wiki/Bordeaux", 
         "title": "Bordeaux - Wikipedia, the free encyclopedia", 
@@ -49,4 +50,16 @@
         "title": "Quality Hotel Bordeaux Centre - Bordeaux - France", 
         "desc": "Quality Hotel Bordeaux Centre en France. ... Bordeaux, 33000, France. quality.\nbordeaux@wanadoo.fr. +33 (0) 5 56 81 95 12. Quality Hotel Bordeaux Centre."
     }
+=======
+    "http://www.insaland.com/", 
+    "http://www.insaonline.org/", 
+    "http://www.insaland.com/blog/", 
+    "http://gif-iti.tumblr.com/", 
+    "http://www.insa-toulouse.fr/en/", 
+    "http://www.insa-lyon.fr/en", 
+    "http://www.insaindia.org/", 
+    "http://www.insa-lyon.fr/", 
+    "http://www.insa-heels.com/", 
+    "https://twitter.com/insaland"
+>>>>>>> 0fc25d0748a612cb5d628dbae874669641a119d4
 ]

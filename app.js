@@ -19,7 +19,7 @@ router.get('/api/:query', function(req, res) {
 
 	var child = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccardV2.py --seuil", function(error, stdout, stderr) {
 		console.log("Ending Exec");
-		console.log("stdout");
+		console.log(stdout);
 		res.end( JSON.stringify( stdout ));
 	});
 	
