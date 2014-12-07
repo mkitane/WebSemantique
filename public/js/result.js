@@ -68,15 +68,7 @@ function resultLoading(data)
 			container.appendChild(element_desc);
 	
 			table.appendChild(container);
-	  });
-	 var imageHolder = document.getElementById("imageHolder");
-	 var jumbo = document.createElement("div");
-	 jumbo.className ="jumbotron";
-	 var image = document.createElement("img");
-	 image.src="images/weighted_graph.png"
-	 jumbo.appendChild(image);
-	 imageHolder.appendChild(jumbo);
-	 
+	  }); 
 	// Supprimer le loader
 	document.getElementById("containerloader").parentNode.removeChild(document.getElementById("containerloader"));
 }

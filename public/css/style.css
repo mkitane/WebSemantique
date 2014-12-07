@@ -28,6 +28,18 @@ font-weight: 300;
 text-align: center;
 }
 
+#containerGraph
+{
+  background-color: red;
+  width: 1500px;
+  height: 500px;
+}
+#graphDiv{ 
+  background-color: blue;
+  width: 1000px; 
+}
+
+
 .search{
     
 color: #fff;
