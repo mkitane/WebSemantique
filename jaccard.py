@@ -34,6 +34,19 @@ def compareFiles(iFile,iFile2):
 	#print concordance
 	return concordance
 
+def jaccard_index(set_a, set_b):
+	intersection = 0
+	num_lines_a = len(set_a)
+	num_lines_b = len(set_b)
+	for elem_a in set_a:
+		for elem_b in set_b:
+			if elem_a == elem_b: 
+				intersection += 1
+	union = num_lines_a + num_lines_b - intersection
+	return float(intersection)/float(union) 
+
+
+
 def printMatrix(a):
 	matrix = []
 
@@ -104,7 +117,7 @@ if __name__ == '__main__':
 			matriceJaccard[i][j] = concordance
 			matriceJaccard[j][i] = concordance
 
-	#print matriceJaccard
+	print matriceJaccard
 
 	if (sys.argv[1] == "--group") : 
 		matrixHeader = []

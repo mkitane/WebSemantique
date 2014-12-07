@@ -15,56 +15,17 @@ router.get('/api/:query', function(req, res) {
 
 	console.log("Beggining Exec");
 
-	var child = exec("node SliferSearch2.js " + query, function(error, stdout, stderr) {
 
 
-		var child2 = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccard.py --seuil", function(error2, stdout2, stderr2) {
-    		console.log("Ending Exec");
-    		console.log(error2);
-
-			console.log(stdout);
-			console.log('------------------');
-    		console.log(stdout2);
-
-    		console.log("--------");
-
-    		console.log(formatData(stdout, stdout2 ));
-    		res.end( JSON.stringify( formatData(stdout, stdout2 )));
-		});
+	var child = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccardV2.py --seuil", function(error, stdout, stderr) {
+		console.log("Ending Exec");
+		console.log("stdout");
+		res.end( JSON.stringify( stdout ));
 	});
 	
 
 });
 
-
-function formatData(stdout, stdout2)
-{
-	var finalARenvoyer = {
-		"google" : [],
-		"dragon" : []
-	};
-	var jsonGoogle = JSON.parse(stdout);
-   	var jsonStdout2 = JSON.parse(stdout2);
-
-
-   	var jsonDragon = [];
-   	for(var i=0;i<jsonStdout2.length; i++)
-   	{
-   		var urlelem = jsonStdout2[i];
-   		var descTitle = findDescription(jsonGoogle,urlelem);
-
-   		var elem = { url : urlelem, 
-   					 desc : descTitle.desc,
-   					 title : descTitle.title 
-   					};
-   		jsonDragon.push(elem);
-   	}
-
-   	finalARenvoyer.google = jsonGoogle;
-	finalARenvoyer.dragon = jsonDragon;
-
-	return finalARenvoyer;
-}
 
 function findDescription(jsonGoogle, url)
 {
