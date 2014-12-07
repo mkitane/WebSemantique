@@ -16,7 +16,7 @@ router.get('/api/:query', function(req, res) {
 	console.log("Beggining Exec");
 
 
-	var commandLine = "./src/SliferSearch.py " + query + " | ./src/textURL.py | node src/spotlight.js | ./src/SliferSPARQL.py | ./src/jaccardV2.py --seuil"; 
+	var commandLine = "./src/SliferSearch.py " + query + " | ./src/textURL.py | node src/spotlight.js | ./src/SliferSPARQL.py | ./src/jaccard.py --seuil"; 
 	var child = exec( commandLine , function(error, stdout, stderr) {
 		if(!error)
 		{
