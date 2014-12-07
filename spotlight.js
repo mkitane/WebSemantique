@@ -23,6 +23,8 @@ function analyzeData(chunk)
         {
             var uriObject = {
                 url: urlAndText.url,
+                title : urlAndText.title,
+                desc : urlAndText.desc,
                 resources: []
             };
             if (urlAndText.text != "") {
