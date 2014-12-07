@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<!-- Scripts -->
+	<script src="public/js/result.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>	
+
+ <!-- Stylesheet -->
+ <link href="public/css/style.css" rel="stylesheet">
+ <link href="public/css/bootstrap-theme.min.css" rel="stylesheet">
+ <link href="public/css/bootstrap.min.css" rel="stylesheet">
+ <link href='http://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+ 
+ <!-- En-tête de la page -->
+    <head>
+        <meta charset="utf-8" />
+        <title>DragonSearch</title>
+    </head>
+  
+    <!-- Corps de la page -->
+    <body onload="sendRequest();">
+        <div class="Moreno">
+        <form role="form" action="./DragonSearchResult.html">
+            <input name="searchTerm" class="form-controle"  type="text" ></input>
+            <input value="Search" class="bouttonB" type="submit" />
+        </form>
+        </div>
+		<div class="container" >
+      		<div class="GoogleContainer">
+            		<h3 class="resultText">Google Results</h3>
+                        <div id="GS"></div>
+                  </div>
+                  <div class="DragonContainer">
+                        <h3 class="resultText">Dragon Search Results</h3>
+                        <div id="DS"></div>
+                  </div>		
+		</div>
+		<div class="container" id="imageHolder">
+  	</div>
+		<div id="containerloader">
+            <div class="windows8">
+                  <div class="wBall" id="wBall_1">
+                  <div class="wInnerBall">
+                  </div>
+                  </div>
+                  <div class="wBall" id="wBall_2">
+                  <div class="wInnerBall">
+                  </div>
+                  </div>
+                  <div class="wBall" id="wBall_3">
+                  <div class="wInnerBall">
+                  </div>
+                  </div>
+                  <div class="wBall" id="wBall_4">
+                  <div class="wInnerBall">
+                  </div>
+                  </div>
+                  <div class="wBall" id="wBall_5">
+                  <div class="wInnerBall">
+                  </div>
+                  </div>
+                  </div> 
+            </div>
+    </body>
+</html>

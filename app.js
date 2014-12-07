@@ -16,8 +16,8 @@ router.get('/api/:query', function(req, res) {
 	console.log("Beggining Exec");
 
 
-
-	var child = exec("./SliferSearch.py " + query + " | ./textURL.py | node spotlight.js | ./SliferSPARQL.py | ./jaccardV2.py --seuil", function(error, stdout, stderr) {
+	var commandLine = "./src/SliferSearch.py " + query + " | ./src/textURL.py | node src/spotlight.js | ./src/SliferSPARQL.py | ./src/jaccardV2.py --seuil"; 
+	var child = exec( commandLine , function(error, stdout, stderr) {
 		console.log("Ending Exec");
 		console.log(stdout);
 		res.end( JSON.stringify( stdout ));
@@ -25,23 +25,6 @@ router.get('/api/:query', function(req, res) {
 	
 
 });
-
-
-function findDescription(jsonGoogle, url)
-{
-	for(var i=0; i<jsonGoogle.length; i++)
-	{
-		if(jsonGoogle[i].url == url)
-		{
-			return { desc : jsonGoogle[i].desc,
-					title : jsonGoogle[i].title
-				}
-		}
-	}
-
-	return "";
-}
-
 
 var server = http.createServer(router);
 server.listen(1234);
